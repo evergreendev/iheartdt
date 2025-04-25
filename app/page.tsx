@@ -1,8 +1,51 @@
+"use client"
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [videoSrc, setVideoSrc] = useState("");
+
+  const openModal = (src: string) => {
+    setVideoSrc(src);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setVideoSrc("");
+  };
   return (
     <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+      {/* Video Modal */}
+      {isModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+          onClick={closeModal}
+        >
+          <div 
+            className="relative w-full max-w-4xl mx-4 bg-black rounded-lg overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center"
+              onClick={closeModal}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <video 
+              controls 
+              autoPlay
+              className="w-full aspect-video"
+            >
+              <source src={videoSrc} type={videoSrc.endsWith('.mp4') ? 'video/mp4' : 'video/quicktime'} />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      )}
       {/* Hero Section */}
       <section className="relative h-screen flex items-center">
         <Image
@@ -44,69 +87,53 @@ export default function Home() {
           <p className="text-lg text-center max-w-3xl mx-auto mb-12">
             Hear why local business owners ❤️ being part of Downtown Rapid City. Check out our Meet the Merchants video series to discover the stories and passion behind the businesses that make our downtown a must-visit destination.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Video thumbnails would go here - using images as placeholders */}
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <div className="relative h-64">
-                <Image
-                  src="/IMG_5322.jpg"
-                  alt="Merchant 1"
-                  fill
-                  className="object-cover"
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* TinderBox */}
+            <div className="rounded-lg overflow-hidden shadow-lg bg-white">
+              <div 
+                className="relative aspect-video cursor-pointer group"
+                onClick={() => openModal("/meet-the-merchants/tinderbox/MTM_TinderBox_Final.mp4")}
+              >
+                <Image 
+                  src="/meet-the-merchants/tinderbox/TinderBox_2.png"
+                  alt="TinderBox Video"
+                  width={720}
+                  height={1280}
+                  className="object-cover w-full"
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-white">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                 </div>
-              </div>
-              <div className="p-4">
-                <h3 className="font-bold text-xl mb-2">Local Boutique Owner</h3>
-                <p>Discover why this boutique owner loves being part of Downtown Rapid City's vibrant community.</p>
               </div>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <div className="relative h-64">
-                <Image
-                  src="/IMG_8393.jpg"
-                  alt="Merchant 2"
-                  fill
+
+            {/* Victoria's Garden */}
+            <div className="rounded-lg overflow-hidden shadow-lg bg-white">
+              <div 
+                className="relative aspect-video cursor-pointer group"
+                onClick={() => openModal("/meet-the-merchants/victorias-garden/VG_MTM_2.mov")}
+              >
+                <Image 
+                  src="/meet-the-merchants/victorias-garden/VG_3.png"
+                  alt="Victoria's Garden Video"
+                  width={720}
+                  height={1280}
                   className="object-cover"
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-white">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                 </div>
-              </div>
-              <div className="p-4">
-                <h3 className="font-bold text-xl mb-2">Restaurant Chef</h3>
-                <p>Learn about the culinary inspiration behind one of Downtown Rapid City's favorite restaurants.</p>
-              </div>
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <div className="relative h-64">
-                <Image
-                  src="/IMG_8400.jpg"
-                  alt="Merchant 3"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-white">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <div className="p-4">
-                <h3 className="font-bold text-xl mb-2">Art Gallery Owner</h3>
-                <p>Explore the artistic side of Downtown Rapid City through the eyes of a local gallery owner.</p>
               </div>
             </div>
           </div>
@@ -133,11 +160,11 @@ export default function Home() {
               </li>
               <li className="flex items-start">
                 <span className="text-red-600 mr-2">❤️</span>
-                <span><strong>Spot the Stickers:</strong> Look for "I ❤️ Downtown Rapid City" stickers and banners around town—snap a photo and share your pride!</span>
+                <span><strong>Spot the Stickers:</strong> Look for &#34;I ❤️ Downtown Rapid City&#34; stickers and banners around town—snap a photo and share your pride!</span>
               </li>
               <li className="flex items-start">
                 <span className="text-red-600 mr-2">❤️</span>
-                <span><strong>Be a Part of the Story:</strong> Check out our "Meet the Merchants" video series to hear why local business owners love being part of downtown Rapid City.</span>
+                <span><strong>Be a Part of the Story:</strong> Check out our &#34;Meet the Merchants&#34; video series to hear why local business owners love being part of downtown Rapid City.</span>
               </li>
               <li className="flex items-start">
                 <span className="text-red-600 mr-2">❤️</span>
@@ -219,7 +246,7 @@ export default function Home() {
               </div>
               <div className="p-6">
                 <h3 className="font-bold text-xl mb-2">Winter 2024 Newsletter</h3>
-                <p className="mb-4">Look back at holiday celebrations and find out what's coming up in the new year for downtown Rapid City.</p>
+                <p className="mb-4">Look back at holiday celebrations and find out what&#39;s coming up in the new year for downtown Rapid City.</p>
                 <a href="#" className="text-red-600 font-bold hover:underline">Read Newsletter →</a>
               </div>
             </div>
