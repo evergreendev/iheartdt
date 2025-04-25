@@ -15,7 +15,7 @@ export default function Home() {
         <div className="relative z-10  mx-auto px-4 text-center text-white">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">I ❤️ Downtown Rapid City</h1>
           <h2 className="text-2xl md:text-3xl mb-8">Celebrate the heart of Rapid City and the people who make it truly special.</h2>
-          <div className="bg-black/50 w-full p-4">
+          <div className="bg-black/50 w-full p-4 mb-12">
             <p className="max-w-3xl mx-auto mb-10 text-lg">
               Downtown Rapid City is more than just a place — it’s a vibrant community filled with unique businesses, welcoming faces, and countless reasons to love it. Our “I ❤️ Downtown Rapid City” campaign celebrates the heart of our city and the people who make it truly special.
             </p>
